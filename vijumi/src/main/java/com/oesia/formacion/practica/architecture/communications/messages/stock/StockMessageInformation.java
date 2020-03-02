@@ -2,69 +2,69 @@ package com.oesia.formacion.practica.architecture.communications.messages.stock;
 
 public class StockMessageInformation {
 
-	private int articleId;
-	private String description;
-	private int colourId;
-	private int sizeId;
-	private int numUnit;
-	
+	private int idArticle;
+	private String descriptionArticle;
+	private int idColor;
+	private int idTalla;
+	private int numUds;
+
 	public StockMessageInformation(Builder builder) {
-		this.articleId = builder.articleId;
-		this.description = builder.description;
-		this.colourId = builder.colourId;
-		this.sizeId = builder.sizeId;
-		this.numUnit = builder.numUnit;
+		this.idArticle = builder.idArticle;
+		this.descriptionArticle = builder.descriptionArticle;
+		this.idColor = builder.idColor;
+		this.idTalla = builder.idTalla;
+		this.numUds = builder.numUds;
 	}
 
-	public int getArticleId() {
-		return articleId;
+	public int getIdArticle() {
+		return idArticle;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescriptionArticle() {
+		return descriptionArticle;
 	}
 
-	public int getColourId() {
-		return colourId;
+	public int getIdColor() {
+		return idColor;
 	}
 
-	public int getSizeId() {
-		return sizeId;
+	public int getIdTalla() {
+		return idTalla;
 	}
 
-	public int getNumUnit() {
-		return numUnit;
+	public int getNumUds() {
+		return numUds;
 	}
 
 	public static class Builder {
-		private int articleId;
-		private String description;
-		private int colourId;
-		private int sizeId;
-		private int numUnit;
-		
+		private int idArticle;
+		private String descriptionArticle;
+		private int idColor;
+		private int idTalla;
+		private int numUds;
+
 		public StockMessageInformation build() {
 			return new StockMessageInformation(this);
 		}
-	}
-	
-	public void articleId(int articleId) {
-		this.articleId = articleId;
-	}
-	
-	public void description(String description) {
-		this.description = description;
-	}
-	
-	public void colourId(int colourId) {
-		this.colourId = colourId;
-	}
-	
-	public void sizeId(int sizeId) {
-		this.sizeId = sizeId;
-	}
-	
-	public void numUnit(int numUnit) {
-		this.numUnit = numUnit;
+
+		public void idArticle(int idArticle) {
+			this.idArticle = idArticle;
+		}
+
+		public void descriptionArticle(String descriptionArticle) {
+			this.descriptionArticle = descriptionArticle;
+		}
+
+		public void idColor(int idColor) {
+			this.idColor = idColor;
+		}
+
+		public void idTalla(int idTalla) {
+			this.idTalla = idTalla;
+		}
+
+		public void numUds(int numUds) {
+			this.numUds = numUds;
+		}
 	}
 }

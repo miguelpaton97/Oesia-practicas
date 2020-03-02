@@ -45,9 +45,10 @@ public class ArticleManagerImpl extends AbstractManager<Article> implements Arti
 //		}
 		Article articleDataBase = articleEntity.findById(put.getIdArticle());
 		if (articleDataBase != null) {
-			//TODO implementar Setters de Article
+			int stockUpdate = articleDataBase.getNumUnit() + article.getNumUnit();
+			article.setNumUnit(stockUpdate);
 			articleEntity.update(article);
-			LOGGER.debug(String.format("Articulo con id: %s, actualizado correctamente", put.getIdArticle()));
+			LOGGER.debug(String.format("Articulo con id: %s, actualizado correctamente", article.getArticleId()));
 		} else {
 			articleEntity.create(article);
 			LOGGER.debug(String.format("Articulo con id: %s, creado correctamente", put.getIdArticle()));

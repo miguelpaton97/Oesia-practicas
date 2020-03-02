@@ -11,7 +11,7 @@ public class Article {
 	private Size size;
 	private int numUnit;
 
-	public Article (Builder builder) {
+	public Article(Builder builder) {
 		this.vendordata = builder.vendordata;
 		this.articleId = builder.articleId;
 		this.description = builder.description;
@@ -44,46 +44,69 @@ public class Article {
 		return numUnit;
 	}
 
+	public void setVendordata(VendorData vendordata) {
+		this.vendordata = vendordata;
+	}
+
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setColour(Colour colour) {
+		this.colour = colour;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
+
+	public void setNumUnit(int numUnit) {
+		this.numUnit = numUnit;
+	}
+
 	@Override
 	public String toString() {
-		return "Article [vendordata=" + vendordata + ", ArticleId=" + articleId
-				+ ", description=" + description + ", colour=" + colour + ", size=" + size + ", NumUnit=" + numUnit
-				+ "]";
+		return "Article [vendordata=" + vendordata + ", ArticleId=" + articleId + ", description=" + description
+				+ ", colour=" + colour + ", size=" + size + ", NumUnit=" + numUnit + "]";
 	}
-	
+
 	public static class Builder {
-		
+
 		private VendorData vendordata;
 		private int articleId;
 		private String description;
 		private Colour colour;
 		private Size size;
 		private int numUnit;
-		
+
 		public Article build() {
 			return new Article(this);
 		}
-		
+
 		public void vendordata(VendorData vendorData) {
 			this.vendordata = vendorData;
 		}
-		
+
 		public void articleId(Integer articleId) {
 			this.articleId = articleId;
 		}
-		
+
 		public void description(String description) {
 			this.description = description;
 		}
-		
+
 		public void colour(Colour colour) {
 			this.colour = colour;
 		}
-		
+
 		public void size(Size size) {
 			this.size = size;
 		}
-		
+
 		public void numUnit(Integer numUnit) {
 			this.numUnit = numUnit;
 		}

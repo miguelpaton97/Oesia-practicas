@@ -6,7 +6,6 @@ import com.oesia.formacion.practica.architecture.communications.messages.stock.S
 import com.oesia.formacion.practica.architecture.communications.messages.stock.StockMessageInformation.Builder;
 import com.oesia.formacion.practica.architecture.domain.model.Message;
 
-
 public class StockInformationProcessor implements Processor {
 
 	private static final int STOCK_ARTICLE_ID_POSITION = 0;
@@ -17,17 +16,24 @@ public class StockInformationProcessor implements Processor {
 
 	@Override
 	public void process(Message message) {
-		
+
 		for (List<String> row : message.getRecords()) {
 
-			int articleId = Integer.parseInt(row.get(STOCK_ARTICLE_ID_POSITION));
-			String description = row.get(STOCK_DESCRIPTION_POSITION);
-			int colourId = Integer.parseInt(row.get(STOCK_COLOUR_ID_POSITION));
-			int sizeId = Integer.parseInt(row.get(STOCK_SIZE_ID_POSITION));
-			int numUnit = Integer.parseInt(row.get(STOCK_NUM_UNIT_POSITION));
+			int idArticle = Integer.parseInt(row.get(STOCK_ARTICLE_ID_POSITION));
+			String descriptionArticle = row.get(STOCK_DESCRIPTION_POSITION);
+			int idColor = Integer.parseInt(row.get(STOCK_COLOUR_ID_POSITION));
+			int idTalla = Integer.parseInt(row.get(STOCK_SIZE_ID_POSITION));
+			int numUds = Integer.parseInt(row.get(STOCK_NUM_UNIT_POSITION));
 
 			StockMessageInformation.Builder stockBuilder = new Builder();
-	
+			stockBuilder.idArticle(idArticle);
+			stockBuilder.descriptionArticle(descriptionArticle);
+			stockBuilder.idColor(idColor);
+			stockBuilder.numUds(numUds);
+			stockBuilder.idTalla(idTalla);
+
+			StockMessageInformation stockMessageInformation = stockBuilder.build();
+
 		}
 	}
 }

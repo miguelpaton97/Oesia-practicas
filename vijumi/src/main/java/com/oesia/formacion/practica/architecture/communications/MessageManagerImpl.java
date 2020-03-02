@@ -22,7 +22,7 @@ public class MessageManagerImpl implements MessageManager {
 			break;
 
 		default:
-			send("KO");
+			send(" ---- KO ----   No valid operation.\n");
 			break;
 		}
 	}
