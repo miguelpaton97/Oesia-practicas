@@ -45,9 +45,8 @@ public class ArticleManagerImpl extends AbstractManager<Article> implements Arti
 //		}
 		Article articleDataBase = articleEntity.findById(put.getIdArticle());
 		if (articleDataBase != null) {
-			int stockUpdate = articleDataBase.getNumUnit() + article.getNumUnit();
-			article.setNumUnit(stockUpdate);
-			articleEntity.update(article);
+			actualizaArticuloDataBase(articleDataBase, article);
+			articleEntity.update(articleDataBase);
 			LOGGER.debug(String.format("Articulo con id: %s, actualizado correctamente", article.getArticleId()));
 		} else {
 			articleEntity.create(article);
@@ -94,6 +93,16 @@ public class ArticleManagerImpl extends AbstractManager<Article> implements Arti
 					put.getIdColor(), e.getMessage()));
 			throw e;
 		}
+	}
+	
+	private void actualizaArticuloDataBase(Article articleDataBase, Article article) {
+		
+		int stockUpdate = articleDataBase.getNumUnit() + article.getNumUnit();
+		articleDataBase.setColour(article.getColour());
+		articleDataBase.setDescription(article.getDescription());
+		articleDataBase.setVendordata(article.getVendordata());
+		articleDataBase.setNumUnit(stockUpdate);
+		articleDataBase.setSize(article.getSize());
 	}
 
 }

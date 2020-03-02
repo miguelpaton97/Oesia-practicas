@@ -48,10 +48,6 @@ public class Article {
 		this.vendordata = vendordata;
 	}
 
-	public void setArticleId(int articleId) {
-		this.articleId = articleId;
-	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}

@@ -29,42 +29,48 @@ public class PutInformationProcessor implements Processor {
 
 		for (List<String> row : message.getRecords()) {
 
-			int idWorkOrder = Integer.parseInt(row.get(PUT_ID_WORKORDER_POSITION));
-			int idVendor = Integer.parseInt(row.get(PUT_ID_VENDOR_POSITION));
-			int idArticle = Integer.parseInt(row.get(PUT_COD_ARTICLE_POSITION));
-			String descriptionArticle = row.get(PUT_DESCRIPTION_ARTICLE_POSITION);
-			int idColor = Integer.parseInt(row.get(PUT_ID_COLOR_POSITION));
-			int idTalla = Integer.parseInt(row.get(PUT_ID_TALLA_POSITION));
-			int numUds = Integer.parseInt(row.get(PUT_NUM_UDS_POSITION));
-			Colour color = Colour.findById(idColor);
-			Size talla = Size.findById(idTalla);
-			VendorData vendor = VendorData.findById(idVendor);
-
-			PutMessageInformation.Builder putBuilder = new Builder();
-			putBuilder.idWorkOrder(idWorkOrder);
-			putBuilder.idArticle(idArticle);
-			putBuilder.idVendor(idVendor);
-			putBuilder.descriptionArticle(descriptionArticle);
-			putBuilder.idColor(idColor);
-			putBuilder.idTalla(idTalla);
-			putBuilder.numUds(numUds);
-			putBuilder.color(color);
-			putBuilder.talla(talla);
-			putBuilder.vendor(vendor);
-
-			PutMessageInformation putMessageInformation = putBuilder.build();
+			PutMessageInformation put = createPutByRow(row);
 
 			ArticleManager articleManager = ContextFactory.getContext().get(ArticleManager.class);
 			MessageManager messageManager = ContextFactory.getContext().get(MessageManager.class);
 			try {
-				articleManager.createArticleOrUpdateStock(putMessageInformation);
-				messageManager.send("----- OK -----   [Work Order id: " + idWorkOrder + "]\n\n");
+				articleManager.createArticleOrUpdateStock(put);
+				messageManager.send(String.format("----- OK -----   [Work Order id: %s]\n\n", put.getIdWorkOrder()));
 //				LOGGER.debug(String.format("Articulo con id: %s, introducido correctamente", idArticle));
 			} catch (Exception e) {
-				messageManager.send("----- KO -----   [Work Order id: " + idWorkOrder + "]\n\n");
+				messageManager.send(String.format("----- KO -----   [Work Order id: %s]\n\n", put.getIdWorkOrder()));
 //				LOGGER.error(String.format("Se ha producido un error al procesar la operacion PUT de articulo con id: [%s]. Error => %s", idArticle, e.getMessage()));
 			}
 		}
+	}
+
+	private PutMessageInformation createPutByRow(List<String> row) {
+
+		int idWorkOrder = Integer.parseInt(row.get(PUT_ID_WORKORDER_POSITION));
+		int idVendor = Integer.parseInt(row.get(PUT_ID_VENDOR_POSITION));
+		int idArticle = Integer.parseInt(row.get(PUT_COD_ARTICLE_POSITION));
+		String descriptionArticle = row.get(PUT_DESCRIPTION_ARTICLE_POSITION);
+		int idColor = Integer.parseInt(row.get(PUT_ID_COLOR_POSITION));
+		int idTalla = Integer.parseInt(row.get(PUT_ID_TALLA_POSITION));
+		int numUds = Integer.parseInt(row.get(PUT_NUM_UDS_POSITION));
+		Colour color = Colour.findById(idColor);
+		Size talla = Size.findById(idTalla);
+		VendorData vendor = VendorData.findById(idVendor);
+
+		PutMessageInformation.Builder putBuilder = new Builder();
+		putBuilder.idWorkOrder(idWorkOrder);
+		putBuilder.idArticle(idArticle);
+		putBuilder.idVendor(idVendor);
+		putBuilder.descriptionArticle(descriptionArticle);
+		putBuilder.idColor(idColor);
+		putBuilder.idTalla(idTalla);
+		putBuilder.numUds(numUds);
+		putBuilder.color(color);
+		putBuilder.talla(talla);
+		putBuilder.vendor(vendor);
+
+		return putBuilder.build();
+
 	}
 
 }
