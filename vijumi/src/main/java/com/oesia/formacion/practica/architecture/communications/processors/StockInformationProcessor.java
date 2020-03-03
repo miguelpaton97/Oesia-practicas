@@ -30,7 +30,7 @@ public class StockInformationProcessor {
 
 				StockMessageInformation stockInformation = stockBuilder.build();
 
-				messageManager.send(String.format("STOCK|%s|%s|%s|%s|%s", stockInformation.getIdArticle(),
+				messageManager.send(String.format("STOCK|%s|%s|%s|%s|%s\n", stockInformation.getIdArticle(),
 						stockInformation.getDescriptionArticle(), stockInformation.getIdColor(),
 						stockInformation.getIdTalla(), stockInformation.getNumUds()));
 
